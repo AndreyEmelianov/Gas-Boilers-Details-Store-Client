@@ -1,6 +1,8 @@
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import styles from '@/styles/auth/index.module.scss'
 import { MutableRefObject, useRef } from 'react'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+
+import styles from '@/styles/auth/index.module.scss'
+
 
 const AuthPage = () => {
   const isMedia800 = useMediaQuery(800)
