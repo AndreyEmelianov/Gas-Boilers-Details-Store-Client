@@ -1,13 +1,14 @@
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import styles from '@/styles/auth/index.module.scss'
 import { MutableRefObject, useRef } from 'react'
 
 const AuthPage = () => {
+  const isMedia800 = useMediaQuery(800)
   const switchCtn = useRef() as MutableRefObject<HTMLDivElement>
   const switchC1 = useRef() as MutableRefObject<HTMLDivElement>
   const switchC2 = useRef() as MutableRefObject<HTMLDivElement>
   const switchCircle1 = useRef() as MutableRefObject<HTMLDivElement>
   const switchCircle2 = useRef() as MutableRefObject<HTMLDivElement>
-  const switchBtn = useRef() as MutableRefObject<HTMLDivElement>
   const aContainer = useRef() as MutableRefObject<HTMLDivElement>
   const bContainer = useRef() as MutableRefObject<HTMLDivElement>
 
@@ -98,12 +99,19 @@ const AuthPage = () => {
           ref={switchCircle2}
         />
         <div className={styles.switch__container} id="switch-c1" ref={switchC1}>
-          <h2 className={`${styles.switch__title} ${styles.title}`}>
-            Welcome Back !
-          </h2>
-          <p className={`${styles.switch__description} ${styles.description}`}>
-            To keep connected with us please login with your personal info
-          </p>
+          {!isMedia800 && (
+            <>
+              <h2 className={`${styles.switch__title} ${styles.title}`}>
+                Добро пожаловать!
+              </h2>
+              <p
+                className={`${styles.switch__description} ${styles.description}`}
+              >
+                Чтобы использовать весь функционал, пожалуйста, войдите под
+                своей учётной записью
+              </p>
+            </>
+          )}
           <button
             onClick={switchForm}
             className={`${styles.switch__button} ${styles.button} ${styles.switch__btn}`}
@@ -116,12 +124,18 @@ const AuthPage = () => {
           id="switch-c2"
           ref={switchC2}
         >
-          <h2 className={`${styles.switch__title} ${styles.title}`}>
-            Hello Friend !
-          </h2>
-          <p className={`${styles.switch__description} ${styles.description}`}>
-            Enter your personal details and start journey with us
-          </p>
+          {!isMedia800 && (
+            <>
+              <h2 className={`${styles.switch__title} ${styles.title}`}>
+                Добро пожаловать
+              </h2>
+              <p
+                className={`${styles.switch__description} ${styles.description}`}
+              >
+                Ввойдите под своей учётной записью
+              </p>
+            </>
+          )}
           <button
             onClick={switchForm}
             className={`${styles.switch__button} ${styles.button} ${styles.switch__btn}`}
