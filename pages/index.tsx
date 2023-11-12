@@ -57,6 +57,100 @@ export default function Home() {
               priority
             />
           </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+        </div>
+
+        <div className={styles.center}>
+          <Image
+            className={styles.logo}
+            src="/next.svg"
+            alt="Next.js Logo"
+            width={180}
+            height={37}
+            priority
+          />
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+        </div>
+
+        <div className={styles.center}>
+          <Image
+            className={styles.logo}
+            src="/next.svg"
+            alt="Next.js Logo"
+            width={180}
+            height={37}
+            priority
+          />
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
+          <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div>
         </div>
 
         <div className={styles.grid}>
@@ -71,6 +165,103 @@ export default function Home() {
             </h2>
             <p className={inter.className}>
               Find in-depth information about Next.js features and&nbsp;API.
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
+            </p>
+          </a>
+
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className={inter.className}>
+              Learn <span>-&gt;</span>
+            </h2>
+            <p className={inter.className}>
+              Learn about Next.js in an interactive course with&nbsp;quizzes!
             </p>
           </a>
 
