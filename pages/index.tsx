@@ -1,3 +1,4 @@
+import AuthPage from '@/components/templates/AuthPage/AuthPage'
 import Head from 'next/head'
 
 function Auth() {
@@ -16,7 +17,7 @@ function Auth() {
           href="/img/logo-fav.png"
         />
       </Head>
-      <h1>Boilers House Auth</h1>
+      <AuthPage />
     </>
   )
 }
