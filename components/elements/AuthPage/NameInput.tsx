@@ -1,18 +1,18 @@
-import { IAuthPageNameInputProps } from '@/types/auth'
+import { IAuthPageInputProps } from '@/types/auth'
 
 import styles from '@/styles/auth/index.module.scss'
 
-const NameInput = ({ register, errors }: IAuthPageNameInputProps) => {
+const NameInput = ({ register, errors }: IAuthPageInputProps) => {
   console.log('')
   return (
-    <label className={styles.form__label} htmlFor="">
+    <label className={styles.form__label}>
       <input
         {...register('name', {
           required: 'Введите имя',
           minLength: 2,
           maxLength: 16,
           pattern: {
-            value: /^[а-яА-Яа-zA-ZеЁ]*$/,
+            value: /^[а-яА-Яa-zA-ZёЁ]*$/,
             message: 'Недопустимые символы!',
           },
         })}

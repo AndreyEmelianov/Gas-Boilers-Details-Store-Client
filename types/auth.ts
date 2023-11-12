@@ -5,7 +5,7 @@ export interface IInputs {
   email: string
   password: string
 }
-export interface IAuthPageNameInputProps {
+export interface IAuthPageInputProps {
   register: UseFormRegister<IInputs>
   errors: FieldErrors<IInputs>
 }

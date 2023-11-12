@@ -4,16 +4,22 @@ import NameInput from '@/components/elements/AuthPage/NameInput'
 import { IInputs } from '@/types/auth'
 
 import styles from '@/styles/auth/index.module.scss'
+import EmailInput from '@/components/elements/AuthPage/EmailInput'
+import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
 
 const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    resetField,
   } = useForm<IInputs>()
 
   const onSubmit = (data: IInputs) => {
     console.log(data)
+    resetField('email')
+    resetField('name')
+    resetField('password')
     switchForm()
   }
 
@@ -23,12 +29,8 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
         Создать аккаунт
       </h2>
       <NameInput register={register} errors={errors} />
-      <input className={styles.form__input} type="text" placeholder="Email" />
-      <input
-        className={styles.form__input}
-        type="password"
-        placeholder="Password"
-      />
+      <EmailInput register={register} errors={errors} />
+      <PasswordInput register={register} errors={errors} />
       <button
         className={`${styles.form__button} ${styles.button} ${styles.submit}`}
       >

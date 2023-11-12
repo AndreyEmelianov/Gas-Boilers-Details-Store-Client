@@ -417,3 +417,11 @@ $transition: 1.25s;
     width: 150px;
   }
 }
+
+.error_alert {
+  font-size: 12px;
+  color: rgb(223, 47, 47);
+  position: absolute;
+  left: 10px;
+  bottom: -15px;
+}

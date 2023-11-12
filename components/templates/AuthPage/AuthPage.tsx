@@ -2,8 +2,7 @@ import { MutableRefObject, useRef } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 import styles from '@/styles/auth/index.module.scss'
-
-
+import SignUpForm from '@/components/modules/AuthPage/SignUpForm'
 const AuthPage = () => {
   const isMedia800 = useMediaQuery(800)
   const switchCtn = useRef() as MutableRefObject<HTMLDivElement>
@@ -38,31 +37,7 @@ const AuthPage = () => {
         ref={aContainer}
       >
         <div className={styles.container__inner}>
-          <form className={`${styles.form}`}>
-            <h2 className={`${styles.form_title} ${styles.title}`}>
-              Create Account
-            </h2>
-            <input
-              className={styles.form__input}
-              type="text"
-              placeholder="Name"
-            />
-            <input
-              className={styles.form__input}
-              type="text"
-              placeholder="Email"
-            />
-            <input
-              className={styles.form__input}
-              type="password"
-              placeholder="Password"
-            />
-            <button
-              className={`${styles.form__button} ${styles.button} ${styles.submit}`}
-            >
-              SIGN UP
-            </button>
-          </form>
+          <SignUpForm switchForm={switchForm} />
         </div>
       </div>
       <div
