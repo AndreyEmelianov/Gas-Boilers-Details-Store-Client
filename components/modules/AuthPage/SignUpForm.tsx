@@ -1,15 +1,19 @@
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 import NameInput from '@/components/elements/AuthPage/NameInput'
 import EmailInput from '@/components/elements/AuthPage/EmailInput'
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
 import { IInputs } from '@/types/auth'
 import { signUpFx } from '@/api/auth/auth'
+import { showAuthError } from '@/utils/errors'
 
 import styles from '@/styles/auth/index.module.scss'
+import spinnerStyles from '@/styles/spinner/index.module.scss'
 
 const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
+  const [spinner, setSpinner] = useState(false)
+
   const {
     register,
     formState: { errors },
@@ -19,6 +23,7 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
 
   const onSubmit = async (data: IInputs) => {
     try {
+      setSpinner(true)
       const userData = await signUpFx({
         url: '/users/signup',
         username: data.name,
@@ -26,12 +31,18 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
         password: data.password,
       })
 
+      if (!userData) {
+        return
+      }
+
       resetField('email')
       resetField('name')
       resetField('password')
       switchForm()
     } catch (err) {
-      toast.error((err as Error).message)
+      showAuthError(err)
+    } finally {
+      setSpinner(false)
     }
   }
 
@@ -46,7 +57,7 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
       <button
         className={`${styles.form__button} ${styles.button} ${styles.submit}`}
       >
-        РЕГИСТРАЦИЯ
+        {spinner ? <div className={spinnerStyles.spinner} /> : 'РЕГИСТРАЦИЯ'}
       </button>
     </form>
   )

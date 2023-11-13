@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 import { useState } from 'react'
 
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
 import NameInput from '@/components/elements/AuthPage/NameInput'
 import { IInputs } from '@/types/auth'
 import { signInFx } from '@/api/auth/auth'
+import { showAuthError } from '@/utils/errors'
 
 import styles from '@/styles/auth/index.module.scss'
 import spinnerStyles from '@/styles/spinner/index.module.scss'
@@ -32,7 +32,7 @@ const SignInForm = () => {
       resetField('name')
       resetField('password')
     } catch (err) {
-      toast.error((err as Error).message)
+      showAuthError(err)
     } finally {
       setSpinner(false)
     }
