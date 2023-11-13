@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useStore } from 'effector-react'
+import { useRouter } from 'next/router'
 
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
 import NameInput from '@/components/elements/AuthPage/NameInput'
@@ -17,6 +18,8 @@ const SignInForm = () => {
 
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
+
+  const route = useRouter()
 
   const {
     register,
@@ -36,6 +39,7 @@ const SignInForm = () => {
 
       resetField('name')
       resetField('password')
+      route.push('/dashboard')
     } catch (err) {
       showAuthError(err)
     } finally {
