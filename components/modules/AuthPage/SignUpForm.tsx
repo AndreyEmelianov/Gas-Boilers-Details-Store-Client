@@ -34,7 +34,7 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
       <button
         className={`${styles.form__button} ${styles.button} ${styles.submit}`}
       >
-        SIGN UP
+        РЕГИСТРАЦИЯ
       </button>
     </form>
   )
