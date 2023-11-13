@@ -64,7 +64,7 @@ const AuthPage = () => {
             <button
               className={`${styles.form__button} ${styles.button} ${styles.submit}`}
             >
-              SIGN IN
+              ВОЙТИ
             </button>
           </form>
         </div>
@@ -109,7 +109,7 @@ const AuthPage = () => {
               <p
                 className={`${styles.switch__description} ${styles.description}`}
               >
-                Ввойдите под своей учётной записью
+                Если у вас ещё нет аккаунта, зарегистрируйте его
               </p>
             </>
           )}

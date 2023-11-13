@@ -9,3 +9,10 @@ export interface IAuthPageInputProps {
   register: UseFormRegister<IInputs>
   errors: FieldErrors<IInputs>
 }
+
+export interface ISignUpFxProps {
+  url: string
+  username: string
+  email: string
+  password: string
+}

@@ -6,6 +6,8 @@ import { IInputs } from '@/types/auth'
 import styles from '@/styles/auth/index.module.scss'
 import EmailInput from '@/components/elements/AuthPage/EmailInput'
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
+import { signUpFx } from '@/api/auth/auth'
+import { toast } from 'react-toastify'
 
 const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
   const {
@@ -15,12 +17,23 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
     resetField,
   } = useForm<IInputs>()
 
-  const onSubmit = (data: IInputs) => {
-    console.log(data)
-    resetField('email')
-    resetField('name')
-    resetField('password')
-    switchForm()
+  const onSubmit = async (data: IInputs) => {
+    try {
+      const userData = await signUpFx({
+        url: '/users/signup',
+        username: data.name,
+        email: data.email,
+        password: data.password,
+      })
+      console.log(userData)
+
+      resetField('email')
+      resetField('name')
+      resetField('password')
+      switchForm()
+    } catch (err) {
+      toast.error((err as Error).message)
+    }
   }
 
   return (
