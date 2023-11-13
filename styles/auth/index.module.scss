@@ -425,3 +425,15 @@ $transition: 1.25s;
   left: 10px;
   bottom: -15px;
 }
+
+.mode__toggle {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 1000;
+
+  @media (max-width: 950px) {
+    top: 5px;
+    right: 5px;
+  }
+}
