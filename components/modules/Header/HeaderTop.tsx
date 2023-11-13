@@ -1,6 +1,9 @@
-import CityButton from '@/components/elements/CityButton/CityButton'
-import styles from '@/styles/header/index.module.scss'
 import Link from 'next/link'
+
+import CityButton from '@/components/elements/CityButton/CityButton'
+import ProfileDropdown from './ProfileDropdown'
+
+import styles from '@/styles/header/index.module.scss'
 
 const HeaderTop = () => {
   console.log('')
@@ -43,6 +46,7 @@ const HeaderTop = () => {
             </li>
           </ul>
         </nav>
+        <ProfileDropdown />
       </div>
     </div>
   )

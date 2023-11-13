@@ -1,3 +1,4 @@
+import Header from '@/components/modules/Header/Header'
 import Head from 'next/head'
 
 function Dashboard() {
@@ -16,6 +17,7 @@ function Dashboard() {
           href="/img/logo-fav.png"
         />
       </Head>
+      <Header />
       <h1>dashboard</h1>
     </>
   )
