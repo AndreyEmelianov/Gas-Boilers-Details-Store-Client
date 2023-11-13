@@ -1,8 +1,11 @@
 import { MutableRefObject, useRef } from 'react'
+
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import SignUpForm from '@/components/modules/AuthPage/SignUpForm'
+import SignInForm from '@/components/modules/AuthPage/SignInForm'
 
 import styles from '@/styles/auth/index.module.scss'
-import SignUpForm from '@/components/modules/AuthPage/SignUpForm'
+
 const AuthPage = () => {
   const isMedia800 = useMediaQuery(800)
   const switchCtn = useRef() as MutableRefObject<HTMLDivElement>
@@ -46,27 +49,7 @@ const AuthPage = () => {
         ref={bContainer}
       >
         <div className={styles.container__inner}>
-          <form className={styles.form}>
-            <h2 className={`${styles.form_title} ${styles.title}`}>
-              Sign in to Website
-            </h2>
-
-            <input
-              className={styles.form__input}
-              type="text"
-              placeholder="Email"
-            />
-            <input
-              className={styles.form__input}
-              type="password"
-              placeholder="Password"
-            />
-            <button
-              className={`${styles.form__button} ${styles.button} ${styles.submit}`}
-            >
-              ВОЙТИ
-            </button>
-          </form>
+          <SignInForm />
         </div>
       </div>
       <div className={styles.switch} id="switch-cnt" ref={switchCtn}>
@@ -93,7 +76,7 @@ const AuthPage = () => {
             onClick={switchForm}
             className={`${styles.switch__button} ${styles.button} ${styles.switch__btn}`}
           >
-            SIGN IN
+            ВОЙТИ
           </button>
         </div>
         <div
@@ -117,7 +100,7 @@ const AuthPage = () => {
             onClick={switchForm}
             className={`${styles.switch__button} ${styles.button} ${styles.switch__btn}`}
           >
-            SIGN UP
+            РЕГИСТРАЦИЯ
           </button>
         </div>
       </div>

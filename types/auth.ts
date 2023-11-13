@@ -16,3 +16,9 @@ export interface ISignUpFxProps {
   email: string
   password: string
 }
+
+export interface ISignInFxProps {
+  url: string
+  username: string
+  password: string
+}

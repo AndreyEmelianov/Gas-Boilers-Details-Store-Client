@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import NameInput from '@/components/elements/AuthPage/NameInput'
-import { IInputs } from '@/types/auth'
-
-import styles from '@/styles/auth/index.module.scss'
 import EmailInput from '@/components/elements/AuthPage/EmailInput'
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
+import { IInputs } from '@/types/auth'
 import { signUpFx } from '@/api/auth/auth'
-import { toast } from 'react-toastify'
+
+import styles from '@/styles/auth/index.module.scss'
 
 const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
   const {
@@ -25,7 +25,6 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
         email: data.email,
         password: data.password,
       })
-      console.log(userData)
 
       resetField('email')
       resetField('name')
