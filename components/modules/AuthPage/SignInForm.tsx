@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 import PasswordInput from '@/components/elements/AuthPage/PasswordInput'
 import NameInput from '@/components/elements/AuthPage/NameInput'
@@ -7,8 +8,11 @@ import { IInputs } from '@/types/auth'
 import { signInFx } from '@/api/auth/auth'
 
 import styles from '@/styles/auth/index.module.scss'
+import spinnerStyles from '@/styles/spinner/index.module.scss'
 
 const SignInForm = () => {
+  const [spinner, setSpinner] = useState(false)
+
   const {
     register,
     formState: { errors },
@@ -18,6 +22,7 @@ const SignInForm = () => {
 
   const onSubmit = async (data: IInputs) => {
     try {
+      setSpinner(true)
       await signInFx({
         url: '/users/login',
         username: data.name,
@@ -28,6 +33,8 @@ const SignInForm = () => {
       resetField('password')
     } catch (err) {
       toast.error((err as Error).message)
+    } finally {
+      setSpinner(false)
     }
   }
 
@@ -39,7 +46,7 @@ const SignInForm = () => {
       <button
         className={`${styles.form__button} ${styles.button} ${styles.submit}`}
       >
-        ВОЙТИ
+        {spinner ? <div className={spinnerStyles.spinner} /> : 'ВОЙТИ'}
       </button>
     </form>
   )
