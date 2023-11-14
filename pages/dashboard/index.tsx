@@ -18,7 +18,10 @@ function Dashboard() {
         />
       </Head>
       <Header />
-      <h1>dashboard</h1>
+      <main>
+        <h1>dashboard</h1>
+        <div className="overlay" />
+      </main>
     </>
   )
 }
