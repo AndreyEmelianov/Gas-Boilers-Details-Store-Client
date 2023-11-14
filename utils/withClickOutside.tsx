@@ -1,4 +1,3 @@
-import { IWrapperComponentProps } from '@/types/common'
 import {
   ForwardRefExoticComponent,
   RefAttributes,
@@ -7,6 +6,8 @@ import {
   MutableRefObject,
   useEffect,
 } from 'react'
+
+import { IWrapperComponentProps } from '@/types/common'
 
 export function withClickOutside(
   WrappedComponent: ForwardRefExoticComponent<
