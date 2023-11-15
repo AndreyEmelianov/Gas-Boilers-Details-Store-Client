@@ -1,13 +1,13 @@
 import { MutableRefObject, useRef } from 'react'
+import { useStore } from 'effector-react'
 
+import { $mode } from '@/context/mode'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import SignUpForm from '@/components/modules/AuthPage/SignUpForm'
 import SignInForm from '@/components/modules/AuthPage/SignInForm'
+import ModeToggler from '@/components/elements/ModeToggler/ModeToggler'
 
 import styles from '@/styles/auth/index.module.scss'
-import ModeToggler from '@/components/elements/ModeToggler/ModeToggler'
-import { useStore } from 'effector-react'
-import { $mode } from '@/context/mode'
 
 const AuthPage = () => {
   const isMedia800 = useMediaQuery(800)
