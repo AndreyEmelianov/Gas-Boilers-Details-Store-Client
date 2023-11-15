@@ -1,3 +1,4 @@
+import Footer from '@/components/modules/Footer/Footer'
 import Header from '@/components/modules/Header/Header'
 import Head from 'next/head'
 
@@ -22,6 +23,7 @@ function Dashboard() {
         <h1>dashboard</h1>
         <div className="overlay" />
       </main>
+      <Footer />
     </>
   )
 }

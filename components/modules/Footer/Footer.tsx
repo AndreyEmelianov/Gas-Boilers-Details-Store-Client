@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import FooterLogo from './FooterLogo'
 import styles from '@/styles/footer/index.module.scss'
 import OnlineStoreContent from './OnlineStoreContent'
@@ -14,7 +15,7 @@ const Footer = () => {
       <div className={styles.footer__container}>
         <div className={styles.footer__top}>
           <FooterLogo />
-          <div className={styles.footer__inner}>
+          <div className={styles.footer__top__inner}>
             <div className={styles.footer__top__item}>
               <h3 className={styles.footer__top__item__title}>
                 Интернет-магазин
@@ -25,53 +26,113 @@ const Footer = () => {
               <h3 className={styles.footer__top__item__title}>Компания</h3>
               <ContentOfCompany />
             </div>
-            <div className={styles.footer__top__item}>
-              <h3 className={styles.footer__top__item__title}>Контакты</h3>
-              <ul
-                className={`${styles.footer__top__item__list} ${styles.footer__top__item__contacts}`}
-              >
-                <li className={`${styles.footer__top__item__list__item}`}>
-                  <Link href="/contacts" passHref legacyBehavior>
-                    <a
-                      className={`${styles.footer__top__item__list__item__link}`}
-                    >
-                      <span>Наш адрес:</span>
-                      <span>г. Москва, ул. ... д....</span>
-                      <span>
-                        <MarkerSvg />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-                <li className={`${styles.footer__top__item__list__item}`}>
+          </div>
+          <div className={styles.footer__top__item}>
+            <h3 className={styles.footer__top__item__title}>Контакты</h3>
+            <ul
+              className={`${styles.footer__top__item__list} ${styles.footer__top__item__contacts}`}
+            >
+              <li className={`${styles.footer__top__item__list__item}`}>
+                <Link href="/contacts" passHref legacyBehavior>
                   <a
-                    href="mailto:info@gasboilers.com.ru"
                     className={`${styles.footer__top__item__list__item__link}`}
                   >
-                    <span>E-mail:</span>
-                    <span>info@gasboilers.com.ru</span>
+                    <span>Наш адрес:</span>
+                    <span>г. Москва, ул. ... д....</span>
                     <span>
-                      <MailSvg />
+                      <MarkerSvg />
                     </span>
                   </a>
+                </Link>
+              </li>
+              <li className={`${styles.footer__top__item__list__item}`}>
+                <a
+                  href="mailto:info@gasboilers.com.ru"
+                  className={`${styles.footer__top__item__list__item__link}`}
+                >
+                  <span>E-mail:</span>
+                  <span>info@gasboilers.com.ru</span>
+                  <span>
+                    <MailSvg />
+                  </span>
+                </a>
+              </li>
+              <li className={`${styles.footer__top__item__list__item}`}>
+                <a
+                  href="tel:+789053333333"
+                  className={`${styles.footer__top__item__list__item__link}`}
+                >
+                  <span>Наш контактный телефон:</span>
+                  <span>+7(8905) 333-33-33</span>
+                  <span>
+                    <PhoneSvg />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.footer__bottom}>
+          <div className={styles.footer__bottom__block}>
+            <div className={styles.footer__bottom__block__left}>
+              <h3 className={styles.footer__bottom__block__title}>
+                Мы принимаем к оплате:
+              </h3>
+              <ul className={styles.footer__bottom__block__pay}>
+                <li className={styles.footer__bottom__block__pay__item}>
+                  <img src="/img/gpay.png" alt="google-pay" />
                 </li>
-                <li className={`${styles.footer__top__item__list__item}`}>
+                <li className={styles.footer__bottom__block__pay__item}>
+                  <img src="/img/pay.png" alt="apple-pay" />
+                </li>
+                <li className={styles.footer__bottom__block__pay__item}>
+                  <img src="/img/visa.png" alt="visa card" />
+                </li>
+                <li className={styles.footer__bottom__block__pay__item}>
+                  <img src="/img/master-card.png" alt="master card" />
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.footer__bottom__block__right}>
+              <h3 className={styles.footer__bottom__block__title}>
+                Наши соцсети:
+              </h3>
+              <ul className={styles.footer__bottom__block__social}>
+                <li className={styles.footer__bottom__block__social__item}>
                   <a
-                    href="tel:+789053333333"
-                    className={`${styles.footer__top__item__list__item__link}`}
-                  >
-                    <span>Наш контактный телефон:</span>
-                    <span>+7(8905) 333-33-33</span>
-                    <span>
-                      <PhoneSvg />
-                    </span>
-                  </a>
+                    className={styles.footer__bottom__block__social__item_vk}
+                    href="#"
+                  />
+                </li>
+                <li className={styles.footer__bottom__block__social__item}>
+                  <a
+                    className={styles.footer__bottom__block__social__item_fb}
+                    href="#"
+                  />
+                </li>
+                <li className={styles.footer__bottom__block__social__item}>
+                  <a
+                    className={styles.footer__bottom__block__social__item_inst}
+                    href="#"
+                  />
+                </li>
+                <li className={styles.footer__bottom__block__social__item}>
+                  <a
+                    className={styles.footer__bottom__block__social__item_ytb}
+                    href="#"
+                  />
                 </li>
               </ul>
             </div>
           </div>
+          <div className={styles.footer__bottom__block}>
+            <p className={styles.footer__bottom__block__copyright}>
+              © «Детали для газовых котлов» 2023
+            </p>
+          </div>
         </div>
-        <div className={styles.footer__bottom} />
       </div>
     </footer>
   )
