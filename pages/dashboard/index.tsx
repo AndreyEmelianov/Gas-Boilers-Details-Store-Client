@@ -1,6 +1,6 @@
-import Footer from '@/components/modules/Footer/Footer'
-import Header from '@/components/modules/Header/Header'
 import Head from 'next/head'
+
+import Layout from '@/components/layout/Layout'
 
 function Dashboard() {
   return (
@@ -18,12 +18,12 @@ function Dashboard() {
           href="/img/logo-fav.png"
         />
       </Head>
-      <Header />
-      <main>
-        <h1>dashboard</h1>
-        <div className="overlay" />
-      </main>
-      <Footer />
+      <Layout>
+        <main>
+          <h1>dashboard</h1>
+          <div className="overlay" />
+        </main>
+      </Layout>
     </>
   )
 }

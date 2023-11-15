@@ -21,3 +21,7 @@ export interface IAccordion {
   titleClass: string
   openArrowClass: string
 }
+
+export interface ILayoutProps {
+  children: React.ReactNode
+}
