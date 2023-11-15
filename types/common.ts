@@ -14,3 +14,10 @@ export type SelectOptionType =
   | MultiValue<ISelectOption>
   | SingleValue<ISelectOption>
   | null
+
+export interface IAccordion {
+  children: React.ReactNode
+  title: string | false
+  titleClass: string
+  openArrowClass: string
+}
