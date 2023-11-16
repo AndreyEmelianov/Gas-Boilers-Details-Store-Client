@@ -9,6 +9,8 @@ import { $mode } from '@/context/mode'
 import styles from '@/styles/dashboard/index.module.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import BrandSliderNextArrow from '@/components/elements/BrandSliderNextArrow/BrandSliderNextArrow'
+import BrandSliderPrevArrow from '@/components/elements/BrandSliderPrevArrow/BrandSliderPrevArrow'
 
 const BrandsSlider = () => {
   const isMedia768 = useMediaQuery(768)
@@ -94,6 +96,8 @@ const BrandsSlider = () => {
     variableWidth: true,
     autoplay: true,
     speed: 500,
+    nextArrow: <BrandSliderNextArrow modeClass={darkModeClass} />,
+    prevArrow: <BrandSliderPrevArrow modeClass={darkModeClass} />,
   }
 
   return (
