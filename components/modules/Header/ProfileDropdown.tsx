@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { useRouter } from 'next/router'
 import { useStore } from 'effector-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -6,10 +7,11 @@ import ProfileSvg from '@/components/elements/ProfileSvg/ProfileSvg'
 import LogoutSvg from '@/components/elements/LogoutSvg/LogoutSvg'
 import { IWrapperComponentProps } from '@/types/common'
 import { $mode } from '@/context/mode'
+import { $user } from '@/context/user'
 import { withClickOutside } from '@/utils/withClickOutside'
+import { logoutFx } from '@/api/auth/auth'
 
 import styles from '@/styles/profileDropDown/index.module.scss'
-import { $user } from '@/context/user'
 
 const ProfileDropDown = forwardRef<HTMLDivElement, IWrapperComponentProps>(
   ({ open, setOpen }, ref) => {
@@ -17,8 +19,14 @@ const ProfileDropDown = forwardRef<HTMLDivElement, IWrapperComponentProps>(
     const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
     const user = useStore($user)
+    const router = useRouter()
 
     const toggleProfileDropdown = () => setOpen(!open)
+
+    const handleLogout = async () => {
+      await logoutFx('/users/logout')
+      router.push('/')
+    }
 
     return (
       <div className={styles.profile} ref={ref}>
@@ -49,7 +57,10 @@ const ProfileDropDown = forwardRef<HTMLDivElement, IWrapperComponentProps>(
                 </span>
               </li>
               <li className={styles.profile__dropdown__item}>
-                <button className={styles.profile__dropdown__item__btn}>
+                <button
+                  className={styles.profile__dropdown__item__btn}
+                  onClick={handleLogout}
+                >
                   <span
                     className={`${styles.profile__dropdown__item__text} ${darkModeClass}`}
                   >

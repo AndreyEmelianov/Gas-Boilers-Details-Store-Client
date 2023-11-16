@@ -1,9 +1,9 @@
 import { createEffect } from 'effector-next'
 import { toast } from 'react-toastify'
+import { AxiosError } from 'axios'
 
 import { ISignInFxProps, ISignUpFxProps } from '@/types/auth'
 import axiosInstance from '../axiosClient'
-import { AxiosError } from 'axios'
 import { HTTPStatus } from '@/constants'
 
 export const signUpFx = createEffect(
@@ -51,6 +51,13 @@ export const checkUserAuthFx = createEffect(async (url: string) => {
       }
     }
 
+    toast.error((err as Error).message)
+  }
+})
+export const logoutFx = createEffect(async (url: string) => {
+  try {
+    await axiosInstance.get(url)
+  } catch (err) {
     toast.error((err as Error).message)
   }
 })
