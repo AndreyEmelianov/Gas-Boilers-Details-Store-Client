@@ -9,11 +9,14 @@ import { $mode } from '@/context/mode'
 import { withClickOutside } from '@/utils/withClickOutside'
 
 import styles from '@/styles/profileDropDown/index.module.scss'
+import { $user } from '@/context/user'
 
 const ProfileDropDown = forwardRef<HTMLDivElement, IWrapperComponentProps>(
   ({ open, setOpen }, ref) => {
     const mode = useStore($mode)
     const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
+
+    const user = useStore($user)
 
     const toggleProfileDropdown = () => setOpen(!open)
 
@@ -37,12 +40,12 @@ const ProfileDropDown = forwardRef<HTMLDivElement, IWrapperComponentProps>(
                 <span
                   className={`${styles.profile__dropdown__username} ${darkModeClass}`}
                 >
-                  Dron
+                  {user.username}
                 </span>
                 <span
                   className={`${styles.profile__dropdown__email} ${darkModeClass}`}
                 >
-                  dron@gmail.com
+                  {user.email}
                 </span>
               </li>
               <li className={styles.profile__dropdown__item}>

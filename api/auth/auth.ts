@@ -3,6 +3,8 @@ import { toast } from 'react-toastify'
 
 import { ISignInFxProps, ISignUpFxProps } from '@/types/auth'
 import axiosInstance from '../axiosClient'
+import { AxiosError } from 'axios'
+import { HTTPStatus } from '@/constants'
 
 export const signUpFx = createEffect(
   async ({ url, username, email, password }: ISignUpFxProps) => {
@@ -34,3 +36,21 @@ export const signInFx = createEffect(
     return data
   }
 )
+
+export const checkUserAuthFx = createEffect(async (url: string) => {
+  try {
+    const { data } = await axiosInstance.get(url)
+
+    return data
+  } catch (err) {
+    const axiosError = err as AxiosError
+
+    if (axiosError.response) {
+      if (axiosError.response.status === HTTPStatus.FORBIDDEN) {
+        return false
+      }
+    }
+
+    toast.error((err as Error).message)
+  }
+})
