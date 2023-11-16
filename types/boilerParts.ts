@@ -13,3 +13,8 @@ export interface IBoilerPart {
   popularity_product: boolean
   compatibility: string
 }
+
+export interface IBoilerParts {
+  count: number
+  rows: IBoilerPart[]
+}

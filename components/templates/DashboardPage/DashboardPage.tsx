@@ -1,16 +1,22 @@
 import { getNewProductOrBestsellersFx } from '@/api/boilerParts/boilerParts'
 import BrandsSlider from '@/components/modules/DashboardPage/BrandsSlider'
+import DashboardSlider from '@/components/modules/DashboardPage/DashboardSlider'
 import { $mode } from '@/context/mode'
 
 import styles from '@/styles/dashboard/index.module.scss'
-import { IBoilerPart } from '@/types/boilerParts'
+import { IBoilerParts } from '@/types/boilerParts'
 import { useStore } from 'effector-react'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 const DashboardPage = () => {
-  const [newProducts, setNewProducts] = useState<IBoilerPart[]>([])
-  const [bestsellers, setBestsellers] = useState<IBoilerPart[]>([])
+  const [newProducts, setNewProducts] = useState<IBoilerParts>(
+    {} as IBoilerParts
+  )
+  const [bestsellers, setBestsellers] = useState<IBoilerParts>(
+    {} as IBoilerParts
+  )
+  const [spinner, setSpinner] = useState<boolean>(false)
 
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
@@ -21,6 +27,7 @@ const DashboardPage = () => {
 
   const loadBoilerParts = async () => {
     try {
+      setSpinner(true)
       const bestsellers = await getNewProductOrBestsellersFx(
         '/boiler-parts/bestsellers'
       )
@@ -32,6 +39,8 @@ const DashboardPage = () => {
       setNewProducts(newProducts)
     } catch (err) {
       toast.error((err as Error).message)
+    } finally {
+      setSpinner(false)
     }
   }
 
@@ -49,7 +58,7 @@ const DashboardPage = () => {
           <h3 className={`${styles.dashboard__parts__title} ${darkModeClass}`}>
             Хиты продаж
           </h3>
-          <span>слайдер с хитами</span>
+          <DashboardSlider items={bestsellers.rows || []} spinner={spinner} />
         </div>
       </div>
     </section>

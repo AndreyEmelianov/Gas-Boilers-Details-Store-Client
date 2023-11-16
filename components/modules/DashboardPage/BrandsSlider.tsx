@@ -5,12 +5,12 @@ import Slider from 'react-slick'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { $mode } from '@/context/mode'
+import BrandSliderPrevArrow from '@/components/elements/BrandSliderPrevArrow/BrandSliderPrevArrow'
+import BrandSliderNextArrow from '@/components/elements/BrandSliderNextArrow/BrandSliderNextArrow'
 
 import styles from '@/styles/dashboard/index.module.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import BrandSliderNextArrow from '@/components/elements/BrandSliderNextArrow/BrandSliderNextArrow'
-import BrandSliderPrevArrow from '@/components/elements/BrandSliderPrevArrow/BrandSliderPrevArrow'
 
 const BrandsSlider = () => {
   const isMedia768 = useMediaQuery(768)
