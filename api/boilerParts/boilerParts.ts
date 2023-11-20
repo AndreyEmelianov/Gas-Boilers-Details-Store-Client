@@ -8,3 +8,9 @@ export const getNewProductOrBestsellersFx = createEffect(
     return data
   }
 )
+
+export const getBoilerPartsFx = createEffect(async (url: string) => {
+  const { data } = await axiosInstance.get(url)
+
+  return data
+})
