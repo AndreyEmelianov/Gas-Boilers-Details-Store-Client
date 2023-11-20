@@ -25,6 +25,7 @@
     "eslint-config-next": "14.0.2",
     "framer-motion": "^10.9.2",
     "next": "14.0.2",
+    "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.48.2",

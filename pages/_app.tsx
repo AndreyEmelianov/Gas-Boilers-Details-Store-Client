@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { withHydrate } from 'effector-next'
 import { ToastContainer } from 'react-toastify'
+import NextProgress from 'nextjs-progressbar'
 import type { AppProps } from 'next/app'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -18,6 +19,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     mounted && (
       <>
+        <NextProgress />
         <Component {...pageProps} />
         <ToastContainer
           position="bottom-right"
