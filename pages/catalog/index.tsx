@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 import Layout from '@/components/layout/Layout'
 import useRedirectByUserCheck from '@/hooks/useRedirectByUserCheck'
+import CatalogPage from '@/components/templates/CatalogPage/CatalogPage'
 
 function Catalog() {
   const { shouldLoadContent } = useRedirectByUserCheck()
@@ -24,7 +25,7 @@ function Catalog() {
       {shouldLoadContent && (
         <Layout>
           <main>
-            <h2>Catalog page</h2>
+            <CatalogPage />
             <div className="overlay" />
           </main>
         </Layout>
