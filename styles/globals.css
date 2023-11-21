@@ -113,3 +113,8 @@ a {
 .slick-track {
   padding-top: 8px;
 }
+
+.selected a {
+  background-color: #1c629e;
+  color: #f2f2f2;
+}
