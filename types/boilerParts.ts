@@ -10,7 +10,7 @@ export interface IBoilerPart {
   in_stock: number
   bestseller: boolean
   new_product: boolean
-  popularity_product: boolean
+  popularity_product: number
   compatibility: string
 }
 
