@@ -67,6 +67,88 @@
         pointer-events: none;
       }
     }
+    .manufacturers {
+      border-bottom: 1px solid #e1e1e1;
+      margin-bottom: 12px;
+
+      &__title {
+        margin: 0;
+        margin-bottom: 12px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #7b7b7b;
+
+        &.dark_mode {
+          color: #f2f2f2;
+        }
+      }
+
+      &__list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &__item {
+          position: relative;
+          border: 1px solid #d5d5d5;
+          border-radius: 40px;
+          padding: 11px 44px 11px 16px;
+          display: flex;
+          align-items: center;
+          margin-bottom: 13px;
+          transition: background-color 0.2s ease-in-out,
+            border-color 0.2s ease-in-out;
+
+          &:hover {
+            background-color: #e9f1fd;
+            border-color: #b1cefa;
+            transition: background-color 0.2s ease-in-out,
+              border-color 0.2s ease-in-out;
+          }
+
+          &:not(:last-child) {
+            margin-right: 12px;
+          }
+
+          &__text {
+            margin-right: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: default;
+            color: #7b7b7b;
+          }
+
+          &__btn {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            top: 3.8px;
+            right: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            background-color: #ffffff;
+
+            span {
+              svg {
+                fill: #1c629e;
+                transition: fill 0.2s ease-in-out;
+              }
+            }
+
+            &:hover span svg {
+              fill: #e0595d;
+              transition: fill 0.2s ease-in-out;
+            }
+          }
+        }
+      }
+    }
   }
 
   &__bottom {

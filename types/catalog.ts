@@ -2,6 +2,13 @@ import { Event } from 'effector-next'
 
 export interface IManufacturersBlockProps {
   title: string
+  event: Event<IFilterCheckboxItem>
+  manufacturersList: IFilterCheckboxItem[]
+}
+
+export interface IManufacturersBlockItemProps {
+  item: IFilterCheckboxItem
+  event: Event<IFilterCheckboxItem>
 }
 
 export interface IQueryParams {
@@ -32,6 +39,10 @@ export interface ICatalogFiltersProps {
   setPriceRange: (arg0: number[]) => void
   setIsPriceRangeChanged: (arg0: boolean) => void
   resetFilterButtonDisabled: boolean
+  resetFilters: VoidFunction
+  isPriceRangeChanged: boolean
+  currentPage: number
+  setIsFilterInQuery: (arg0: boolean) => void
 }
 
 export interface IPriceRangeProps {
@@ -40,6 +51,12 @@ export interface IPriceRangeProps {
   setIsPriceRangeChanged: (arg0: boolean) => void
 }
 
-export interface ICatalogFiltersDesktopProps extends ICatalogFiltersProps {
+export interface ICatalogFiltersDesktopProps {
+  priceRange: number[]
+  setPriceRange: (arg0: number[]) => void
+  setIsPriceRangeChanged: (arg0: boolean) => void
+  resetFilterButtonDisabled: boolean
+  resetFilters: VoidFunction
   spinner: boolean
+  applyFilters: VoidFunction
 }

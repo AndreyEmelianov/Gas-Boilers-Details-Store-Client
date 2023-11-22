@@ -11,6 +11,7 @@ export const setBoilerParts = boilerParts.createEvent<IBoilerParts>()
 export const setBoilerPartsCheapFirst = boilerParts.createEvent()
 export const setBoilerPartsExpensiveFirst = boilerParts.createEvent()
 export const setBoilerPartsByPopularity = boilerParts.createEvent()
+export const setFilteredBoilerParts = boilerParts.createEvent<IBoilerParts>()
 
 export const setBoilerManufacturers =
   boilerParts.createEvent<IFilterCheckboxItem[]>()
@@ -21,7 +22,6 @@ export const setPartsManufacturers =
   boilerParts.createEvent<IFilterCheckboxItem[]>()
 export const updatePartsManufacturer =
   boilerParts.createEvent<IFilterCheckboxItem>()
-
 const updateManufacturer = (
   manufacturers: IFilterCheckboxItem[],
   id: string,
@@ -77,3 +77,6 @@ export const $partsManufacturers = boilerParts
       checked: payload.checked,
     }),
   ])
+export const $filteredBoilerParts = boilerParts
+  .createStore<IBoilerParts>({} as IBoilerParts)
+  .on(setFilteredBoilerParts, (_, parts) => parts)

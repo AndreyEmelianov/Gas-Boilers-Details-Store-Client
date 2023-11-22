@@ -23,6 +23,8 @@ const CatalogFiltersDesktop = ({
   setIsPriceRangeChanged,
   resetFilterButtonDisabled,
   spinner,
+  resetFilters,
+  applyFilters,
 }: ICatalogFiltersDesktopProps) => {
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
@@ -71,6 +73,7 @@ const CatalogFiltersDesktop = ({
         <button
           className={styles.filters__actions__show}
           disabled={spinner || resetFilterButtonDisabled}
+          onClick={applyFilters}
         >
           {spinner ? (
             <span
@@ -84,6 +87,7 @@ const CatalogFiltersDesktop = ({
         <button
           className={styles.filters__actions__reset}
           disabled={resetFilterButtonDisabled}
+          onClick={resetFilters}
         >
           Сбросить
         </button>
