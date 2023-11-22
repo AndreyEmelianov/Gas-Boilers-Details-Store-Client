@@ -14,8 +14,29 @@ export const setBoilerPartsByPopularity = boilerParts.createEvent()
 
 export const setBoilerManufacturers =
   boilerParts.createEvent<IFilterCheckboxItem[]>()
+export const updateBoilerManufacturer =
+  boilerParts.createEvent<IFilterCheckboxItem>()
+
 export const setPartsManufacturers =
   boilerParts.createEvent<IFilterCheckboxItem[]>()
+export const updatePartsManufacturer =
+  boilerParts.createEvent<IFilterCheckboxItem>()
+
+const updateManufacturer = (
+  manufacturers: IFilterCheckboxItem[],
+  id: string,
+  payload: Partial<IFilterCheckboxItem>
+) =>
+  manufacturers.map((item) => {
+    if (item.id === id) {
+      return {
+        ...item,
+        ...payload,
+      }
+    }
+
+    return item
+  })
 
 export const $boilerParts = boilerParts
   .createStore<IBoilerParts>({} as IBoilerParts)
@@ -40,9 +61,19 @@ export const $boilerManufacturers = boilerParts
     boilerManufacturers as IFilterCheckboxItem[]
   )
   .on(setBoilerManufacturers, (_, parts) => parts)
+  .on(updateBoilerManufacturer, (state, payload) => [
+    ...updateManufacturer(state, payload.id as string, {
+      checked: payload.checked,
+    }),
+  ])
 
 export const $partsManufacturers = boilerParts
   .createStore<IFilterCheckboxItem[]>(
     partsManufacturers as IFilterCheckboxItem[]
   )
   .on(setPartsManufacturers, (_, parts) => parts)
+  .on(updatePartsManufacturer, (state, payload) => [
+    ...updateManufacturer(state, payload.id as string, {
+      checked: payload.checked,
+    }),
+  ])

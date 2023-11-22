@@ -16,6 +16,7 @@ import ReactPaginate from 'react-paginate'
 import { IQueryParams } from '@/types/catalog'
 import { useRouter } from 'next/router'
 import { IBoilerParts } from '@/types/boilerParts'
+import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
 
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const [spinner, setSpinner] = useState(false)
@@ -150,7 +151,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
         <div className={`${styles.catalog__bottom} ${darkModeClass}`}>
           <div className={`${styles.catalog__bottom__inner} `}>
-            <div>Filters</div>
+            <CatalogFilters />
 
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>

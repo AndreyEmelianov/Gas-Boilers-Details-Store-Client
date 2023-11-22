@@ -20,6 +20,8 @@ export interface IAccordion {
   title: string | false
   titleClass: string
   openArrowClass: string
+  isMobileForFilters?: boolean
+  hideArrowClass?: string
 }
 
 export interface ILayoutProps {

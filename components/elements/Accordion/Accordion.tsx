@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+
 import { IAccordion } from '@/types/common'
 
 const Accordion = ({
@@ -8,6 +9,8 @@ const Accordion = ({
   title,
   titleClass,
   openArrowClass,
+  isMobileForFilters,
+  hideArrowClass,
 }: IAccordion) => {
   const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -15,15 +18,25 @@ const Accordion = ({
 
   return (
     <>
-      <motion.button
-        initial={false}
-        onClick={toggleAccordion}
-        className={`${titleClass} ${expanded ? openArrowClass : ''}`}
-      >
-        {title}
-      </motion.button>
+      {title ? (
+        isMobileForFilters ? (
+          <button className={`${titleClass} ${hideArrowClass}`}>{title}</button>
+        ) : (
+          <motion.button
+            initial={false}
+            onClick={toggleAccordion}
+            className={`${titleClass} ${
+              expanded ? (isMobileForFilters ? '' : openArrowClass) : ''
+            }`}
+          >
+            {title}
+          </motion.button>
+        )
+      ) : (
+        ''
+      )}
       <AnimatePresence initial={false}>
-        {expanded && (
+        {(isMobileForFilters || expanded) && (
           <motion.div
             key="content"
             initial="collapsed"

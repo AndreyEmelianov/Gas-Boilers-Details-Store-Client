@@ -2,6 +2,7 @@
 import Select from 'react-select'
 import { useStore } from 'effector-react'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { $mode } from '@/context/mode'
 import { ISelectOption, SelectOptionType } from '@/types/common'
@@ -20,7 +21,7 @@ import {
   selectStyles,
 } from '@/styles/catalog/select'
 import { optionStyles } from '@/styles/searchInput'
-import { useRouter } from 'next/router'
+
 const FilterSelect = () => {
   const [categoryOption, setCategoryOption] = useState<SelectOptionType>(null)
 
