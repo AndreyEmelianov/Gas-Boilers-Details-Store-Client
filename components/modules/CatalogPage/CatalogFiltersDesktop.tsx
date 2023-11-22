@@ -10,10 +10,20 @@ import {
   updatePartsManufacturer,
 } from '@/context/boilerParts'
 import FilterManufacturerAccordion from './FilterManufacturerAccordion'
+import { ICatalogFiltersDesktopProps } from '@/types/catalog'
+import Accordion from '@/components/elements/Accordion/Accordion'
+import PriceRange from './PriceRange'
 
 import styles from '@/styles/catalog/index.module.scss'
+import spinnerStyles from '@/styles/spinner/index.module.scss'
 
-const CatalogFiltersDesktop = () => {
+const CatalogFiltersDesktop = ({
+  setPriceRange,
+  priceRange,
+  setIsPriceRangeChanged,
+  resetFilterButtonDisabled,
+  spinner,
+}: ICatalogFiltersDesktopProps) => {
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
@@ -32,6 +42,22 @@ const CatalogFiltersDesktop = () => {
         />
       </div>
 
+      <div className={styles.filters__price}>
+        <Accordion
+          title="Цена"
+          titleClass={`${styles.filters__manufacturer__btn} ${darkModeClass}`}
+          openArrowClass={styles.open}
+        >
+          <div className={styles.filters__manufacturer__inner}>
+            <PriceRange
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              setIsPriceRangeChanged={setIsPriceRangeChanged}
+            />
+          </div>
+        </Accordion>
+      </div>
+
       <div className={styles.filters__boiler_manufacturers}>
         <FilterManufacturerAccordion
           manufacturersList={partsManufacturers}
@@ -39,6 +65,28 @@ const CatalogFiltersDesktop = () => {
           updateManufacturer={updatePartsManufacturer}
           setManufacturer={setPartsManufacturers}
         />
+      </div>
+
+      <div className={styles.filters__actions}>
+        <button
+          className={styles.filters__actions__show}
+          disabled={spinner || resetFilterButtonDisabled}
+        >
+          {spinner ? (
+            <span
+              className={spinnerStyles.spinner}
+              style={{ top: 6, left: '47%' }}
+            />
+          ) : (
+            'Показать'
+          )}
+        </button>
+        <button
+          className={styles.filters__actions__reset}
+          disabled={resetFilterButtonDisabled}
+        >
+          Сбросить
+        </button>
       </div>
     </div>
   )

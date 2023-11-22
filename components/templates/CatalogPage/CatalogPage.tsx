@@ -2,26 +2,49 @@ import { useStore } from 'effector-react'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import ReactPaginate from 'react-paginate'
+import { useRouter } from 'next/router'
 
 import ManufacturersBlock from '@/components/modules/CatalogPage/ManufacturersBlock'
 import FilterSelect from '@/components/modules/CatalogPage/FilterSelect'
-import { $boilerParts, setBoilerParts } from '@/context/boilerParts'
+import {
+  $boilerManufacturers,
+  $boilerParts,
+  $partsManufacturers,
+  setBoilerParts,
+} from '@/context/boilerParts'
 import { $mode } from '@/context/mode'
 import { getBoilerPartsFx } from '@/api/boilerParts/boilerParts'
-
-import styles from '@/styles/catalog/index.module.scss'
-import skeletonStyles from '@/styles/skeleton/index.module.scss'
 import CatalogItem from '@/components/modules/CatalogPage/CatalogItem'
-import ReactPaginate from 'react-paginate'
 import { IQueryParams } from '@/types/catalog'
-import { useRouter } from 'next/router'
 import { IBoilerParts } from '@/types/boilerParts'
 import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
 
+import styles from '@/styles/catalog/index.module.scss'
+import skeletonStyles from '@/styles/skeleton/index.module.scss'
+
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
+  const [priceRange, setPriceRange] = useState([1000, 10000])
+  const [isPriceRangeChanged, setIsPriceRangeChanged] = useState(false)
   const [spinner, setSpinner] = useState(false)
-  const boilerParts = useStore($boilerParts)
+
   const router = useRouter()
+
+  const boilerParts = useStore($boilerParts)
+  const boilerManufacturers = useStore($boilerManufacturers)
+  const partsManufacturers = useStore($partsManufacturers)
+
+  const isAnyBoilerManufacturerChecked = boilerManufacturers.some(
+    (item) => item.checked
+  )
+  const isAnyPartsManufacturerChecked = partsManufacturers.some(
+    (item) => item.checked
+  )
+  const resetFilterButtonDisabled = !(
+    isPriceRangeChanged ||
+    isAnyBoilerManufacturerChecked ||
+    isAnyPartsManufacturerChecked
+  )
 
   const pagesCount = Math.ceil(boilerParts.count / 20)
   const isValidOffset =
@@ -29,6 +52,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const [currentPage, setCurrentPage] = useState(
     isValidOffset ? +query.offset - 1 : 0
   )
+
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
 
@@ -141,7 +165,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
           <div className={styles.catalog__top__inner}>
             <button
               className={`${styles.catalog__top__reset} ${darkModeClass}`}
-              disabled
+              disabled={resetFilterButtonDisabled}
             >
               Сбросить фильтры
             </button>
@@ -151,7 +175,12 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
         <div className={`${styles.catalog__bottom} ${darkModeClass}`}>
           <div className={`${styles.catalog__bottom__inner} `}>
-            <CatalogFilters />
+            <CatalogFilters
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              setIsPriceRangeChanged={setIsPriceRangeChanged}
+              resetFilterButtonDisabled={resetFilterButtonDisabled}
+            />
 
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>

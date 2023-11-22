@@ -44,6 +44,7 @@ const FilterManufacturerAccordion = ({
         <ul className={`${styles.filters__manufacturer__list}`}>
           {manufacturersList.map((manufacturer) => (
             <FilterCheckboxItem
+              id={manufacturer.id}
               key={manufacturer.id}
               title={manufacturer.title}
               checked={manufacturer.checked}
