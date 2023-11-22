@@ -1,6 +1,8 @@
 import { createDomain } from 'effector-next'
 
 import { IBoilerParts } from '@/types/boilerParts'
+import { IFilterCheckboxItem } from '@/types/catalog'
+import { boilerManufacturers, partsManufacturers } from '@/utils/catalog'
 
 const boilerParts = createDomain()
 
@@ -9,6 +11,11 @@ export const setBoilerParts = boilerParts.createEvent<IBoilerParts>()
 export const setBoilerPartsCheapFirst = boilerParts.createEvent()
 export const setBoilerPartsExpensiveFirst = boilerParts.createEvent()
 export const setBoilerPartsByPopularity = boilerParts.createEvent()
+
+export const setBoilerManufacturers =
+  boilerParts.createEvent<IFilterCheckboxItem[]>()
+export const setPartsManufacturers =
+  boilerParts.createEvent<IFilterCheckboxItem[]>()
 
 export const $boilerParts = boilerParts
   .createStore<IBoilerParts>({} as IBoilerParts)
@@ -27,3 +34,15 @@ export const $boilerParts = boilerParts
       (a, b) => b.popularity_product - a.popularity_product
     ),
   }))
+
+export const $boilerManufacturers = boilerParts
+  .createStore<IFilterCheckboxItem[]>(
+    boilerManufacturers as IFilterCheckboxItem[]
+  )
+  .on(setBoilerManufacturers, (_, parts) => parts)
+
+export const $partsManufacturers = boilerParts
+  .createStore<IFilterCheckboxItem[]>(
+    partsManufacturers as IFilterCheckboxItem[]
+  )
+  .on(setPartsManufacturers, (_, parts) => parts)

@@ -10,3 +10,9 @@ export interface IQueryParams {
   priceFrom: string
   priceTo: string
 }
+
+export interface IFilterCheckboxItem {
+  title: string
+  checked: boolean
+  id?: string
+}
