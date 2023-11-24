@@ -117,7 +117,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
     } catch (err) {
       toast.error((err as Error).message)
     } finally {
-      setSpinner(false)
+      setTimeout(() => setSpinner(false), 1000)
     }
   }
 
@@ -128,19 +128,32 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
   const handlePageChange = async ({ selected }: { selected: number }) => {
     try {
+      setSpinner(true)
       const data = await getBoilerPartsFx('/boiler-parts?limit=20&offset=0')
       if (selected > pagesCount) {
-        resetPagination(data)
+        resetPagination(isFilterInQuery ? filteredBoilerParts : data)
         return
       }
 
       if (isValidOffset && +query.offset > Math.ceil(data.count / 20)) {
-        resetPagination(data)
+        resetPagination(isFilterInQuery ? filteredBoilerParts : data)
         return
       }
 
       const result = await getBoilerPartsFx(
-        `/boiler-parts?limit=20&offset=${selected}`
+        `/boiler-parts?limit=20&offset=${selected}${
+          isFilterInQuery && router.query.boiler
+            ? `&boiler=${router.query.boiler}`
+            : ''
+        }${
+          isFilterInQuery && router.query.parts
+            ? `&parts=${router.query.parts}`
+            : ''
+        }${
+          isFilterInQuery && router.query.priceFrom && router.query.priceTo
+            ? `&priceFrom=${router.query.priceFrom}&priceTo=${router.query.priceTo}`
+            : ''
+        }`
       )
 
       router.push(
@@ -156,12 +169,26 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
       setCurrentPage(selected)
       setBoilerParts(result)
-    } catch (err) {}
+    } catch (err) {
+      toast.error((err as Error).message)
+    } finally {
+      setTimeout(() => setSpinner(false), 1000)
+    }
   }
 
   const resetFilters = async () => {
     try {
       const data = await getBoilerPartsFx('/boiler-parts?limit=20&offset=0')
+
+      const params = router.query
+
+      delete params.boiler
+      delete params.parts
+      delete params.priceFrom
+      delete params.priceTo
+      params.first = 'cheap'
+
+      router.push({ query: { ...params } }, undefined, { shallow: true })
 
       setBoilerManufacturers(
         boilerManufacturers.map((item) => ({ ...item, checked: false }))
@@ -212,7 +239,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
             >
               Сбросить фильтры
             </button>
-            <FilterSelect />
+            <FilterSelect setSpinner={setSpinner} />
           </div>
         </div>
 
@@ -231,7 +258,7 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
             {spinner ? (
               <ul className={skeletonStyles.skeleton}>
-                {Array.from(new Array(8)).map((_, i) => (
+                {Array.from(new Array(20)).map((_, i) => (
                   <li
                     key={i}
                     className={`${skeletonStyles.skeleton__item} ${

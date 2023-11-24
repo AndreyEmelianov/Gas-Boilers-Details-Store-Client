@@ -1,4 +1,10 @@
 .catalog {
+  padding-bottom: 124px;
+
+  @media (max-width: 560px) {
+    padding-bottom: 45px;
+  }
+  
   &__title {
     margin: 0;
     padding: 0;

@@ -22,7 +22,11 @@ import {
 } from '@/styles/catalog/select'
 import { optionStyles } from '@/styles/searchInput'
 
-const FilterSelect = () => {
+const FilterSelect = ({
+  setSpinner,
+}: {
+  setSpinner: (arg0: boolean) => void
+}) => {
   const [categoryOption, setCategoryOption] = useState<SelectOptionType>(null)
 
   const boilerParts = useStore($boilerParts)
@@ -68,6 +72,7 @@ const FilterSelect = () => {
     )
 
   const handleSortOptionChange = (selectedOption: SelectOptionType) => {
+    setSpinner(true)
     setCategoryOption(selectedOption)
 
     switch ((selectedOption as ISelectOption).value) {
@@ -86,6 +91,8 @@ const FilterSelect = () => {
       default:
         break
     }
+
+    setTimeout(() => setSpinner(false), 1000)
   }
 
   return (
