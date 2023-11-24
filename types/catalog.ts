@@ -34,29 +34,55 @@ export interface IFilterManufacturerAccordionProps {
   updateManufacturer: Event<IFilterCheckboxItem>
 }
 
-export interface ICatalogFiltersProps {
+interface ICatalogBaseTypes {
   priceRange: number[]
   setPriceRange: (arg0: number[]) => void
   setIsPriceRangeChanged: (arg0: boolean) => void
+}
+
+interface ICatalogFiltersBaseTypes {
   resetFilterButtonDisabled: boolean
   resetFilters: VoidFunction
+}
+
+export interface ICatalogFiltersProps
+  extends ICatalogBaseTypes,
+    ICatalogFiltersBaseTypes {
   isPriceRangeChanged: boolean
   currentPage: number
+  filtersMobileOpen: boolean
   setIsFilterInQuery: (arg0: boolean) => void
+  closePopup: VoidFunction
 }
 
-export interface IPriceRangeProps {
-  priceRange: number[]
-  setPriceRange: (arg0: number[]) => void
-  setIsPriceRangeChanged: (arg0: boolean) => void
-}
+export type IPriceRangeProps = ICatalogBaseTypes
 
-export interface ICatalogFiltersDesktopProps {
-  priceRange: number[]
-  setPriceRange: (arg0: number[]) => void
-  setIsPriceRangeChanged: (arg0: boolean) => void
-  resetFilterButtonDisabled: boolean
-  resetFilters: VoidFunction
+export interface ICatalogFiltersDesktopProps
+  extends ICatalogBaseTypes,
+    ICatalogFiltersBaseTypes {
   spinner: boolean
   applyFilters: VoidFunction
+}
+export interface ICatalogFiltersMobileProps
+  extends ICatalogBaseTypes,
+    ICatalogFiltersBaseTypes {
+  spinner: boolean
+  filtersMobileOpen: boolean
+  applyFilters: VoidFunction
+  closePopup: VoidFunction
+}
+export interface IFiltersMobilePopupTopProps {
+  resetButtonText: string
+  title: string
+  resetFilterButtonDisabled: boolean
+  resetFilters: VoidFunction
+  closePopup: VoidFunction
+}
+
+export interface IFiltersPopupProps extends IFilterManufacturerAccordionProps {
+  resetFilterButtonDisabled: boolean
+  resetAllManufacturers: VoidFunction
+  handleClosePopup: VoidFunction
+  applyFilters: VoidFunction
+  openPopup: boolean
 }

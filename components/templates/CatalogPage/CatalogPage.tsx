@@ -20,13 +20,16 @@ import {
 } from '@/context/boilerParts'
 import { $mode } from '@/context/mode'
 import { getBoilerPartsFx } from '@/api/boilerParts/boilerParts'
-import CatalogItem from '@/components/modules/CatalogPage/CatalogItem'
 import { IQueryParams } from '@/types/catalog'
 import { IBoilerParts } from '@/types/boilerParts'
+import { usePopup } from '@/hooks/usePopup'
+import CatalogItem from '@/components/modules/CatalogPage/CatalogItem'
 import CatalogFilters from '@/components/modules/CatalogPage/CatalogFilters'
+import { checkQueryParams } from '@/utils/catalog'
 
 import styles from '@/styles/catalog/index.module.scss'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
+import FilterSvg from '@/components/elements/FilterSvg/FilterSvg'
 
 const CatalogPage = ({ query }: { query: IQueryParams }) => {
   const [priceRange, setPriceRange] = useState([1000, 10000])
@@ -62,6 +65,8 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
 
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
+
+  const { toggleOpen, open, closePopup } = usePopup()
 
   useEffect(() => {
     loadBoilerParts()
@@ -140,17 +145,20 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
         return
       }
 
+      const { isValidPriceQuery, isValidBoilerQuery, isValidPartsQuery } =
+        checkQueryParams(router)
+
       const result = await getBoilerPartsFx(
         `/boiler-parts?limit=20&offset=${selected}${
-          isFilterInQuery && router.query.boiler
+          isFilterInQuery && isValidBoilerQuery
             ? `&boiler=${router.query.boiler}`
             : ''
         }${
-          isFilterInQuery && router.query.parts
+          isFilterInQuery && isValidPartsQuery
             ? `&parts=${router.query.parts}`
             : ''
         }${
-          isFilterInQuery && router.query.priceFrom && router.query.priceTo
+          isFilterInQuery && isValidPriceQuery
             ? `&priceFrom=${router.query.priceFrom}&priceTo=${router.query.priceTo}`
             : ''
         }`
@@ -239,6 +247,18 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
             >
               Сбросить фильтры
             </button>
+
+            <button
+              className={`${styles.catalog__top__mobile_btn} `}
+              onClick={toggleOpen}
+            >
+              <span className={`${styles.catalog__top__mobile_btn__svg} `}>
+                <FilterSvg />
+              </span>
+              <span className={`${styles.catalog__top__mobile_btn__text} `}>
+                Фильтр
+              </span>
+            </button>
             <FilterSelect setSpinner={setSpinner} />
           </div>
         </div>
@@ -254,6 +274,8 @@ const CatalogPage = ({ query }: { query: IQueryParams }) => {
               isPriceRangeChanged={isPriceRangeChanged}
               currentPage={currentPage}
               setIsFilterInQuery={setIsFilterInQuery}
+              closePopup={closePopup}
+              filtersMobileOpen={open}
             />
 
             {spinner ? (

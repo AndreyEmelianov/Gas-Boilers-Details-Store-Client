@@ -19,7 +19,7 @@ export interface IAccordion {
   children: React.ReactNode
   title: string | false
   titleClass: string
-  openArrowClass: string
+  openArrowClass?: string
   isMobileForFilters?: boolean
   hideArrowClass?: string
 }
