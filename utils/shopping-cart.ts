@@ -3,9 +3,11 @@ import { toast } from 'react-toastify'
 import {
   addToCartFx,
   removeItemFromCartFx,
+  updateCartItemFx,
 } from '@/api/shopping-cart/shopping-cart'
 import {
   removeShoppingCartItem,
+  updateCartItemTotalPrice,
   updateShoppingCart,
 } from '@/context/shopping-cart'
 
@@ -51,4 +53,16 @@ export const removeItemFromCart = async (
   } finally {
     setSpinner(false)
   }
+}
+
+export const updateTotalPrice = async (
+  total_price: number,
+  productId: number
+) => {
+  const data = await updateCartItemFx({
+    url: `shopping-cart/total-price/${productId}`,
+    payload: { total_price },
+  })
+
+  updateCartItemTotalPrice({ productId, total_price: data.total_price })
 }

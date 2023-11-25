@@ -1,24 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from 'effector-react'
 import Link from 'next/link'
 
 import { $mode } from '@/context/mode'
 import { IShoppingCartItem } from '@/types/shopping-cart'
 import { formatPrice } from '@/utils/common'
-import { removeItemFromCart } from '@/utils/shopping-cart'
+import { removeItemFromCart, updateTotalPrice } from '@/utils/shopping-cart'
 import DeleteSvg from '@/components/elements/DeleteSvg/DeleteSvg'
+import CartItemCounter from '@/components/elements/CartItemCounter/CartItemCounter'
 
 import styles from '@/styles/cartPopup/index.module.scss'
 import spinnerStyles from '@/styles/spinner/index.module.scss'
 
 const CartPopupItem = ({ item }: { item: IShoppingCartItem }) => {
   const [spinner, setSpinner] = useState(false)
+  const [price, setPrice] = useState(item.product_price)
 
   const mode = useStore($mode)
   const darkModeClass = mode === 'dark' ? `${styles.dark_mode}` : ''
   const spinnerDarkModeClass =
-    mode === 'dark' ? `${spinnerStyles.dark_mode}` : ''
+    mode === 'dark' ? '' : `${spinnerStyles.dark_mode}`
+
+  useEffect(() => {
+    setPrice(price * item.count)
+  }, [])
+
+  useEffect(() => {
+    updateTotalPrice(price, item.productId)
+  }, [price])
+
+  const increasePrice = () => setPrice(price + item.product_price)
+  const decreasePrice = () => setPrice(price - item.product_price)
 
   const deleteCartItem = () => removeItemFromCart(item.productId, setSpinner)
 
@@ -58,13 +71,19 @@ const CartPopupItem = ({ item }: { item: IShoppingCartItem }) => {
             Нет в наличии
           </span>
         ) : (
-          <div>счётчик</div>
+          <CartItemCounter
+            totalCount={item.in_stock}
+            productId={item.productId}
+            initialCount={item.count}
+            increasePrice={increasePrice}
+            decreasePrice={decreasePrice}
+          />
         )}
 
         <span
           className={`${styles.cart__popup__list__item__price} ${darkModeClass}`}
         >
-          {formatPrice(item.product_price)} P
+          {formatPrice(price)} P
         </span>
       </div>
     </li>
