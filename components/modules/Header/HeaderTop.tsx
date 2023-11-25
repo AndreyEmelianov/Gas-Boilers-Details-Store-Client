@@ -6,9 +6,9 @@ import ProfileDropdown from './ProfileDropdown'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { $mode } from '@/context/mode'
 import ModeToggler from '@/components/elements/ModeToggler/ModeToggler'
+import { usePopup } from '@/hooks/usePopup'
 
 import styles from '@/styles/header/index.module.scss'
-import { usePopup } from '@/hooks/usePopup'
 
 const HeaderTop = () => {
   const isMedia950 = useMediaQuery(950)

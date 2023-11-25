@@ -1,7 +1,7 @@
 export interface IShoppingCartItem {
   id: number
-  name: string
-  price: number
+  product_name: string
+  product_price: number
   image: string
   in_stock: number
   parts_manufacturer: string
@@ -9,5 +9,10 @@ export interface IShoppingCartItem {
   count: number
   total_price: number
   userId: number
-  partId: number
+  productId: number
+}
+export interface IAddToCartFx {
+  username: string
+  url: string
+  productId: number
 }
