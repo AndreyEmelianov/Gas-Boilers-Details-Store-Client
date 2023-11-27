@@ -1,16 +1,17 @@
+import { useStore } from 'effector-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+
 import { getNewProductOrBestsellersFx } from '@/api/boilerParts/boilerParts'
 import BrandsSlider from '@/components/modules/DashboardPage/BrandsSlider'
 import CartAlert from '@/components/modules/DashboardPage/CartAlert'
 import DashboardSlider from '@/components/modules/DashboardPage/DashboardSlider'
 import { $mode } from '@/context/mode'
 import { $shoppingCart } from '@/context/shopping-cart'
+import { IBoilerParts } from '@/types/boilerParts'
 
 import styles from '@/styles/dashboard/index.module.scss'
-import { IBoilerParts } from '@/types/boilerParts'
-import { useStore } from 'effector-react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 const DashboardPage = () => {
   const [newProducts, setNewProducts] = useState<IBoilerParts>(
@@ -30,6 +31,14 @@ const DashboardPage = () => {
   useEffect(() => {
     loadBoilerParts()
   }, [])
+
+  useEffect(() => {
+    if (shoppingCart.length) {
+      setShowAlert(true)
+      return
+    }
+    setShowAlert(false)
+  }, [shoppingCart.length])
 
   const loadBoilerParts = async () => {
     try {

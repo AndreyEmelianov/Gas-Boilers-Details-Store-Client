@@ -18,6 +18,7 @@ export interface IQueryParams {
   parts: string
   priceFrom: string
   priceTo: string
+  productId: string
 }
 
 export interface IFilterCheckboxItem {
