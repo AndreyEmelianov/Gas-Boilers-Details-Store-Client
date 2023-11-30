@@ -1,5 +1,5 @@
 import { useStore } from 'effector-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { $mode } from '@/context/mode'
@@ -14,7 +14,10 @@ import { $user } from '@/context/user'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import ProductTabs from '@/components/modules/ProductPage/ProductTabs'
 import DashboardSlider from '@/components/modules/DashboardPage/DashboardSlider'
-import { getBoilerPartsFx } from '@/api/boilerParts/boilerParts'
+import {
+  getBoilerPartFx,
+  getBoilerPartsFx,
+} from '@/api/boilerParts/boilerParts'
 import ProductAccordion from '@/components/modules/ProductPage/ProductAccordion'
 import {
   $boilerParts,
@@ -24,10 +27,11 @@ import {
 
 import styles from '@/styles/product/index.module.scss'
 import spinnerStyles from '@/styles/spinner/index.module.scss'
+import { removeItemFromCartFx } from '@/api/shopping-cart/shopping-cart'
 
 const ProductPage = () => {
-  const [spinnerSlider, setSpinnerSlider] = useState(false)
-  const [spinnerToggleCart, setSpinnerToggleCart] = useState(false)
+  const spinnerSlider = useStore(getBoilerPartFx.pending)
+  const spinnerToggleCart = useStore(removeItemFromCartFx.pending)
 
   const boilerParts = useStore($boilerParts)
   const boilerPart = useStore($boilerPart)
@@ -46,20 +50,17 @@ const ProductPage = () => {
 
   const loadBoilerPart = async () => {
     try {
-      setSpinnerSlider(true)
       const data = await getBoilerPartsFx(`/boiler-parts?limit=20&offset=0`)
 
       setBoilerParts(data)
       setBoilerPartsByPopularity()
     } catch (err) {
       toast.error((err as Error).message)
-    } finally {
-      setTimeout(() => setSpinnerSlider(false), 1000)
     }
   }
 
   const toggleToCart = () =>
-    toggleCartItem(user.username, boilerPart.id, isInCart, setSpinnerToggleCart)
+    toggleCartItem(user.username, boilerPart.id, isInCart)
 
   return (
     <section>
