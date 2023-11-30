@@ -18,7 +18,7 @@ const OrderAccordion = ({
   setOrderIsReady,
   showDoneIcon,
 }: IOrderAccordionProps) => {
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
 
   const totalPrice = useStore($totalPrice)
   const shoppingCart = useStore($shoppingCart)

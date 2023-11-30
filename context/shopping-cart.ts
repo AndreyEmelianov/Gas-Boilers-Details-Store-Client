@@ -10,6 +10,8 @@ export const removeShoppingCartItem = shoppingCart.createEvent<number>()
 
 export const setTotalPrice = shoppingCart.createEvent<number>()
 
+export const setDisableCart = shoppingCart.createEvent<boolean>()
+
 export const updateCartItemTotalPrice = shoppingCart.createEvent<{
   productId: number
   total_price: number
@@ -56,3 +58,7 @@ export const $shoppingCart = shoppingCart
 export const $totalPrice = shoppingCart
   .createStore<number>(0)
   .on(setTotalPrice, (_, value) => value)
+
+export const $disableCart = shoppingCart
+  .createStore<boolean>(false)
+  .on(setDisableCart, (_, value) => value)
