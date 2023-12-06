@@ -1,7 +1,8 @@
 import { useStore } from 'effector-react'
 import { toast } from 'react-toastify'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import Layout from '@/components/layout/Layout'
 import useRedirectByUserCheck from '@/hooks/useRedirectByUserCheck'
@@ -9,8 +10,8 @@ import { IQueryParams } from '@/types/catalog'
 import { $boilerPart, setBoilerPart } from '@/context/boilerPart'
 import { getBoilerPartFx } from '@/api/boilerParts/boilerParts'
 import ProductPage from '@/components/templates/ProductPage/ProductPage'
-import { useRouter } from 'next/router'
 import Custom404 from '../404'
+import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
 
 function CatalogProductPage({ query }: { query: IQueryParams }) {
   const [error, setError] = useState(false)
@@ -18,9 +19,22 @@ function CatalogProductPage({ query }: { query: IQueryParams }) {
   const boilerPart = useStore($boilerPart)
   const router = useRouter()
 
+  const getDefaultTextGenerator = useCallback(
+    (subpath: string) => subpath.replace('catalog', 'Каталог'),
+    []
+  )
+  const getTextGenerator = useCallback((param: string) => ({}[param]), [])
+  const lastCrumb = document.querySelector('.last-crumb') as HTMLElement
+
   useEffect(() => {
     loadBoilerPart()
   }, [router.asPath])
+
+  useEffect(() => {
+    if (lastCrumb) {
+      lastCrumb.textContent = boilerPart.product_name
+    }
+  }, [lastCrumb, boilerPart])
 
   const loadBoilerPart = async () => {
     try {
@@ -62,6 +76,10 @@ function CatalogProductPage({ query }: { query: IQueryParams }) {
         shouldLoadContent && (
           <Layout>
             <main>
+              <Breadcrumbs
+                getDefaultTextGenerator={getDefaultTextGenerator}
+                getTextGenerator={getTextGenerator}
+              />
               <ProductPage />
               <div className="overlay" />
             </main>

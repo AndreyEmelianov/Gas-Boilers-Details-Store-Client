@@ -34,3 +34,10 @@ export interface IGeolocation {
   latitude: number
   longitude: number
 }
+
+export interface ICrumbProps {
+  text: string
+  href: string
+  last: boolean
+  textGenerator: () => string
+}

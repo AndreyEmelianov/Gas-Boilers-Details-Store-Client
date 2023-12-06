@@ -53,7 +53,7 @@ const ShippingPayment = () => {
   return (
     <section className={styles.shipping_payment}>
       <div className="container">
-        <h2 className={`${styles.shipping_payment} ${darkModeClass}`}>
+        <h2 className={`${styles.shipping_payment__title} ${darkModeClass}`}>
           Доставка и оплата
         </h2>
 
