@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
 import { $mode } from '@/context/mode'
-import { $user } from '@/context/user'
+import { $user, $userCity } from '@/context/user'
 import {
   $shoppingCart,
   $totalPrice,
@@ -22,6 +22,7 @@ const OrderPage = () => {
   const [orderIsReady, setOrderIsReady] = useState(false)
   const [agreement, setAgreement] = useState(false)
 
+  const userCity = useStore($userCity)
   const user = useStore($user)
   const shoppingCart = useStore($shoppingCart)
   const totalPrice = useStore($totalPrice)
@@ -47,6 +48,11 @@ const OrderPage = () => {
       const data = await makePaymentFx({
         url: '/payment',
         amount: totalPrice,
+        description: `Заказ №1 ${
+          userCity.city.length
+            ? `Город: ${userCity.city}, улица: ${userCity.street}`
+            : ''
+        }`,
       })
 
       sessionStorage.setItem('paymentId', data.id)
@@ -66,7 +72,10 @@ const OrderPage = () => {
 
       if (data.status === 'succeeded') {
         resetCart()
+        return
       }
+
+      sessionStorage.removeItem('paymentId')
     } catch (err) {
       toast.error((err as Error).message)
       resetCart()
